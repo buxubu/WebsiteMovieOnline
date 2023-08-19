@@ -36,6 +36,20 @@ namespace WebMovieOnline.Controllers
 
         }
 
+        [HttpGet("getVideo")]
+        public async Task<IActionResult> GetVideo(int idVideo)
+        {
+            try
+            {
+                return Ok(await _videoServices.GetVideosAsync(idVideo));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+
+        }
+
         [HttpPost("addVideo")]
         public async Task<IActionResult> AddVideo([FromForm] VideoModelViews model)
         {

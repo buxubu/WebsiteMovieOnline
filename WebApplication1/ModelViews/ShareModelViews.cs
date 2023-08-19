@@ -7,7 +7,6 @@
     {
         public Paging(int totalItems, int? page, int pageSize)
         {
-            if (page == 0) pageSize = 10;
             var totalPages = (int)Math.Ceiling((decimal)totalItems / pageSize);
             var currentPages = page != null ? page : 1;
             var startPages = currentPages - 5;
@@ -17,10 +16,10 @@
                 endPages -= (startPages - 1);
                 startPages = 1;
             }
-            if(endPages > totalPages)
+            if (endPages > totalPages)
             {
                 endPages = totalPages;
-                if(endPages > 10)
+                if (endPages > 10)
                 {
                     startPages = endPages - 9;
                 }

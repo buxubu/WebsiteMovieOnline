@@ -12,7 +12,6 @@ public partial class Video
     public int? Episode { get; set; }
 
     public int IdMovie { get; set; }
-    [JsonIgnore]
 
     public virtual Movie IdMovieNavigation { get; set; } = null!;
 }

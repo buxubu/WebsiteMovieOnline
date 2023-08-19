@@ -51,7 +51,7 @@ namespace WebMovieOnline.Services.IGenres
 
         public async Task<IEnumerable<Genre>> GetAllGenresAsync()
         {
-            var getAll = await _db.Genres.ToListAsync();
+            var getAll = await _db.Genres.Take(3).ToListAsync();
             return getAll;
         }
     }

@@ -14,7 +14,6 @@ public partial class Director
     public DateTime? Birhday { get; set; }
 
     public string? Country { get; set; }
-    [JsonIgnore]
 
     public virtual ICollection<Movie> IdMovies { get; } = new List<Movie>();
 }

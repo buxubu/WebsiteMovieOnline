@@ -36,7 +36,7 @@ namespace WebMovieOnline.ModelViews
 
     public class MoviesReponse
     {
-        public IEnumerable<Movie> ListMovie { get; set; }
+        public IEnumerable<MapMovie> ListMovie { get; set; }
         public Paging Pagings { get; set; }
     }
 
@@ -52,5 +52,30 @@ namespace WebMovieOnline.ModelViews
         public int? idCountries { get; set; }
         public int? idLanguages { get; set; }
         public int? idGenres { get; set; }
+    }
+
+    public class MapMovie
+    {
+        public int IdMovie { get; set; }
+
+        public string? NameMovie { get; set; }
+
+        public int? Showtimes { get; set; }
+
+        public string? Description { get; set; }
+
+        public bool? Trending { get; set; }
+
+        public DateTime? ReleaseDate { get; set; }
+
+        public string? Tagline { get; set; }
+
+        public string? MovieStatus { get; set; }
+
+        public string? Images { get; set; }
+
+        public int IdCategory { get; set; }
+
+        public string? TrailerMovie { get; set; }
     }
 }

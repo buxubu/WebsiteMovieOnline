@@ -51,7 +51,7 @@ public partial class DbwebsiteMovieOnlineContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=DBWebsiteMovieOnline;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=DBWebsiteMovieOnline;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -63,25 +63,26 @@ public partial class DbwebsiteMovieOnlineContext : DbContext
 
             entity.Property(e => e.IdAccount).HasColumnName("id_account");
             entity.Property(e => e.Email)
-                .HasMaxLength(200)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("email");
             entity.Property(e => e.FirstName)
-                .HasMaxLength(100)
-                .HasColumnName("first_name");
+                .HasMaxLength(50)
+                .HasColumnName("firstName");
+            entity.Property(e => e.IsAdmin).HasColumnName("isAdmin");
             entity.Property(e => e.LastName)
-                .HasMaxLength(100)
-                .HasColumnName("last_name");
+                .HasMaxLength(50)
+                .HasColumnName("lastName");
             entity.Property(e => e.Password)
-                .HasMaxLength(100)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("password");
+            entity.Property(e => e.Role)
+                .HasMaxLength(10)
+                .HasColumnName("role");
             entity.Property(e => e.Username)
-                .HasMaxLength(100)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("username");
         });
 
@@ -303,9 +304,7 @@ public partial class DbwebsiteMovieOnlineContext : DbContext
                 .HasColumnName("description");
             entity.Property(e => e.IdCategory).HasColumnName("id_category");
             entity.Property(e => e.Images)
-                .HasMaxLength(500)
-                .IsUnicode(false)
-                .IsFixedLength()
+                .HasMaxLength(4000)
                 .HasColumnName("images");
             entity.Property(e => e.MovieStatus)
                 .HasMaxLength(100)
@@ -320,7 +319,6 @@ public partial class DbwebsiteMovieOnlineContext : DbContext
             entity.Property(e => e.Tagline)
                 .HasMaxLength(100)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("tagline");
             entity.Property(e => e.TrailerMovie)
                 .HasMaxLength(4000)
@@ -480,8 +478,6 @@ public partial class DbwebsiteMovieOnlineContext : DbContext
             entity.Property(e => e.IdMovie).HasColumnName("id_movie");
             entity.Property(e => e.NameVideo)
                 .HasMaxLength(500)
-                .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("name_video");
 
             entity.HasOne(d => d.IdMovieNavigation).WithMany(p => p.Videos)

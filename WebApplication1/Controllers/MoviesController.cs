@@ -36,14 +36,30 @@ namespace WebMovieOnline.Controllers
             try
             {
                 model.page = model.page.HasValue ? model.page.Value > 0 ? model.page.Value : 1 : 1;
-                model.pageSize = model.pageSize == 0 ? 10 : model.pageSize;
+                model.pageSize = model.pageSize == 0 ? 12 : model.pageSize;
                 int totalItems = await _moviesServices.CountMovieSearchAsync(model);
-                var listSearchMoviePaging = await _moviesServices.SearchMoviesPagingAsync(model);
-                return Ok(new MoviesReponse
+                var totalPages = (int)Math.Ceiling((decimal)totalItems / model.pageSize);
+                if(model.page <= totalPages)
                 {
-                    ListMovie = listSearchMoviePaging,
-                    Pagings = new Paging(totalItems, model.page, model.pageSize)
-                });
+                    var listSearchMoviePaging = await _moviesServices.SearchMoviesPagingAsync(model);
+                    return Ok(new MoviesReponse
+                    {
+                        ListMovie = listSearchMoviePaging,
+                        Pagings = new Paging(totalItems, model.page, model.pageSize)
+                    });
+                }
+                else
+                {
+                    model.page = totalPages;
+                    var listSearchMoviePaging = await _moviesServices.SearchMoviesPagingAsync(model);
+                    return Ok(new MoviesReponse
+                    {
+                        ListMovie = listSearchMoviePaging,
+                        Pagings = new Paging(totalItems, model.page, model.pageSize)
+                    });
+                }
+                
+                
             }
             catch (Exception ex)
             {
@@ -196,6 +212,72 @@ namespace WebMovieOnline.Controllers
             try
             {
                 return Ok(await _moviesServices.FindTrenMovie());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
+        [HttpGet("getSeriesMovie")]
+        public async Task<IActionResult> GetSerriesMovie()
+        {
+            try
+            {
+                return Ok(await _moviesServices.FindSeriesMovie());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
+        [HttpGet("getMoviesCategory")]
+        public async Task<IActionResult> GetMoviesCategory(int idCategories)
+        {
+            try
+            {
+                return Ok(await _moviesServices.GetMoviesCategoryAsync(idCategories));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
+        [HttpGet("getNameCate")]
+        public async Task<IActionResult> GetNameCate(int idCate)
+        {
+            try
+            {
+                return Ok(await _moviesServices.GetNameCate(idCate));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
+
+        [HttpGet("getMovieCountry")]
+        public async Task<IActionResult> GetMovieCountry(int idCount)
+        {
+            try
+            {
+                return Ok(await _moviesServices.GetMovieCountryAsync(idCount));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
+        [HttpGet("getMovieVideo")]
+        public async Task<IActionResult> GetMovieVideo(int idMovie)
+        {
+            try
+            {
+                return Ok(await _moviesServices.GetMovieVideoAsync(idMovie));
             }
             catch (Exception ex)
             {

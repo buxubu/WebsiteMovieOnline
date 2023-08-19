@@ -8,7 +8,7 @@ namespace WebMovieOnline.Helper
         public AutoMapper()
         {
             CreateMap<Movie,MovieModelViews>();
-            CreateMap<MovieModelViews,Movie>().ForMember(x=>x.IdLanguages, y=>y.MapFrom(z=>z.idLanguages));
+            CreateMap<MovieModelViews,Movie>()/*.ForMember(x=>x.IdLanguages, y=>y.MapFrom(z=>z.idLanguages))*/;
             CreateMap<Video,VideoModelViews>();
             CreateMap<VideoModelViews,Video>();
             CreateMap<Genre, GenresModelViews>();
@@ -27,6 +27,10 @@ namespace WebMovieOnline.Helper
             CreateMap<ProductionCompaniesModelViews, ProductionCompany>();
             CreateMap<Director, DirectorsModelViews>();
             CreateMap<DirectorsModelViews, Director>();
+            CreateMap<Movie, MapMovie>();
+            CreateMap<MapMovie,Movie>();
+            CreateMap<Video, VideoModel>();
+            CreateMap<VideoModel, Video>();
         }
     }
 }

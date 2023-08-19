@@ -11,6 +11,7 @@ namespace WebMovieOnline.Services.IVideo
         Task<Video> AddVideosAsync([FromForm] VideoModelViews model);
         Task<Video> EditVideosAsync([FromForm] VideoModelViews model, int idVideo);
         Task DeleteVideosAsync(int idVideo);
+        Task<Video> GetVideosAsync(int idVideo);
     }
     public class RepoVideos : IVideos
     {
@@ -94,6 +95,12 @@ namespace WebMovieOnline.Services.IVideo
         public async Task<IEnumerable<Video>> GetAllVideosAsync()
         {
             return await _db.Videos.ToListAsync();
+        }
+
+        public async Task<Video> GetVideosAsync(int idVideo)
+        {
+            var getIdVideo = await _db.Videos.Where(x=>x.IdVideo == idVideo).FirstOrDefaultAsync();
+            return getIdVideo;
         }
     }
 }

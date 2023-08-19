@@ -12,7 +12,7 @@ public partial class MovieCast
     public string? CharacterName { get; set; }
 
     public string? Position { get; set; }
-    [JsonIgnore]
+
     public virtual Movie IdMovieNavigation { get; set; } = null!;
 
     public virtual Actor IdPersonNavigation { get; set; } = null!;

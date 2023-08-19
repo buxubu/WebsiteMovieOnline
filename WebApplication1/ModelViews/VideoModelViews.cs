@@ -12,4 +12,14 @@
         
         public int IdMovie { get; set; }
     }
+    public class VideoModel
+    {
+        public int IdVideo { get; set; }
+
+        public string? NameVideo { get; set; }
+
+        public int? Episode { get; set; }
+
+        public int IdMovie { get; set; }
+    }
 }

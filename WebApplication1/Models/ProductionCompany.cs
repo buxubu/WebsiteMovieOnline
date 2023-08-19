@@ -8,6 +8,6 @@ public partial class ProductionCompany
     public int IdCompany { get; set; }
 
     public string? NameCompany { get; set; }
-    [JsonIgnore]
+
     public virtual ICollection<Movie> IdMovies { get; } = new List<Movie>();
 }
